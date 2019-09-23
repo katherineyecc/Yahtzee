@@ -37,6 +37,5 @@ public class GameTest extends TestCase {
 		game.setDList(dlist);
 		game.playerChoice(number);
 		assertEquals(3, game.getScore(0));
-	}//把条件改为rowCount<3
-	//加一个setDList的function
+	}
 }
