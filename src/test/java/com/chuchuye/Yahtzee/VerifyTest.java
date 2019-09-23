@@ -47,7 +47,7 @@ public class VerifyTest extends TestCase {
 	public void testVerifyYahtzee() {
 		int[] list = new int[] {6,6,6,6,6};
 		verify = new Verify(list);
-		assertTime(verify.verifyYahtzee());
+		assertTrue(verify.verifyYahtzee());
 	}
 
 }
