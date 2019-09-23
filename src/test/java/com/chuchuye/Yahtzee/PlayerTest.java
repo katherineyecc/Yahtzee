@@ -90,7 +90,7 @@ public class PlayerTest extends TestCase {
 	public void testSetYahtzeeFlag() {
 		player = new Player();
 		player.setYahtzeeFlag();
-		assertEquals(player.getYahtzeeFlag());
+		assertTrue(player.getYahtzeeFlag());
 	}
 	
 	public void testGetSpecificScore() {
@@ -102,7 +102,8 @@ public class PlayerTest extends TestCase {
 	public void testCountYahtzeeBonus() {
 		player = new Player();
 		player.setYahtzeeFlag();
-		assertEquals(100, player.getSpecificScore(12));
+		player.countYahtzeeBonus();
+		assertEquals(100, player.getYahtzeeBonus());
 	}
 
 }
