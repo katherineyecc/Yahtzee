@@ -16,7 +16,7 @@ public class GameTest extends TestCase {
 	
 	public void testRowTheDice() {
 		game.rowTheDice();
-		assertNotNull(game.dList);
+		assertNotNull(game.getDice());
 	}
 	
 	public void testRowPartDice() {
@@ -36,6 +36,7 @@ public class GameTest extends TestCase {
 		int[] dlist = new int[] {1,1,1,2,2};
 		game.setDList(dlist);
 		game.playerChoice(number);
-		assertEquals(3, game.getScoreBoard(0));
-	}
+		assertEquals(3, game.getScore(0));
+	}//把条件改为rowCount<3
+	//加一个setDList的function
 }
