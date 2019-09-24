@@ -37,5 +37,17 @@ public class GameTest extends TestCase {
 		game.setDList(dlist);
 		game.playerChoice(number);
 		assertEquals(3, game.getScore(0));
+		
+		number = 4;
+		int[] dlist2 = new int[] {1,2,3,5,6};
+		game.setDList(dlist2);
+		game.playerChoice(number);
+		assertEquals(0, game.getScore(3));
+		
+		number = 12;
+		int[] dlist3 = new int[] {3,3,3,4,4};
+		game.setDList(dlist3);
+		game.playerChoice(number);
+		assertEquals(17, game.getScore(11));
 	}
 }
