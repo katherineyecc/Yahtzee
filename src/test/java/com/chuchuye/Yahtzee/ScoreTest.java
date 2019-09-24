@@ -8,6 +8,10 @@ public class ScoreTest extends TestCase {
 		score.setScore(5);
 		int currentScore = score.getScore();
 		assertEquals(5, currentScore);
+		
+		score.setScore(10);
+		currentScore = score.getScore();
+		assertEquals(10, currentScore);
 	}
 
 }
