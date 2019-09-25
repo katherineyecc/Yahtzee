@@ -140,7 +140,7 @@ public class Game {//相当于一局游戏
 				Verify verify6 = new Verify(dList);
 				boolean flag6 = verify6.verifyYahtzee();
 				if(flag6==true) {
-					scoreBoard[12] = dList[0]*5;
+					scoreBoard[12] = 50;
 				}
 				break;
 		}
