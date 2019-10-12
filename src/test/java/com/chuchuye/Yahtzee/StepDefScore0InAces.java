@@ -17,7 +17,7 @@ public class StepDefScore0InAces extends TestCase {
 
 	@When("I want to score Aces")
 	public void i_want_to_score_Aces() {
-	   game.playerChoice(0);
+	   game.playerChoice(1);
 	}
 
 	@Then("I score zero points in Aces")
