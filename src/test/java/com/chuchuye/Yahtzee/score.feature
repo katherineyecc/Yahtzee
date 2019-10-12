@@ -4,16 +4,16 @@ Feature: Score Test feature
 
   @tag1
   Scenario Outline: Score test with invalid numbers
-    Given The Yahtzee Game is on
+    Given The Yahtzee Game for <player> is on
     
-    When The player score <value>
+    When The player score <score>
     
-    Then I get the return <status>
+    Then I get the return <result>
 
     Examples: 
-      | value | status  |
-      |    -1 | -1      |
-      |   476 | -1      |
+      | player  | score | result  |
+      | kat |    -1 | -1      |
+      | kyrie |   476 | -1      |
 
 
   @tag2
