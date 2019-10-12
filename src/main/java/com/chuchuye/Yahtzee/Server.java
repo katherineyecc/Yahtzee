@@ -11,6 +11,8 @@ public class Server {
 	public static ArrayList<ServerThread>list = new ArrayList<ServerThread>();
 	
 	private int playerNumber = 0;
+	private int maxTurn = 13;
+	private int currentRound = 1;
 	
 	private static int[] score = new int[] {-1,-1,-1};
 	
@@ -27,7 +29,7 @@ public class Server {
 			while(true) {
 				
 				if(playerNumber == 3) {
-					System.out.println("Press <<1>> if all the game is over!");
+					System.out.println("Press <<1>> if all the players is ready!");
 					char signal = (char)System.in.read();
 					if(signal == '1')
 						break;
@@ -44,6 +46,28 @@ public class Server {
 				
 				playerNumber++;
 				
+			}
+			
+			while(currentRound <= maxTurn) {
+				while(true) {
+					if((list.get(0).currentSignal.contentEquals("end")) && (list.get(1).currentSignal.contentEquals("end")) && (list.get(2).currentSignal.contentEquals("end"))) {
+						currentRound++;
+						for(int index=0; index<3; index++) {
+							list.get(index).goodToGo = true;
+							System.out.println("Player #"+(index+1)+" is goodToGo.");
+						}
+						list.get(0).currentSignal = "notend";
+						list.get(1).currentSignal = "notend";
+						list.get(2).currentSignal = "notend";
+						break;
+					} else {
+						//System.out.println("Still have players not finishing this round...");
+						for(int index=0; index<3; index++) {
+							System.out.println("Thread #"+(index+1)+" is sleeping...");
+							list.get(index).sleep(2000);
+						}
+					}
+				}
 			}
 			
 			
@@ -110,5 +134,10 @@ public class Server {
 		return score[index];
 	}
 	
+	public static void main(String[] args) {
+		Server server = new Server();
+		server.initServer();
+		
+	}
 	
 }

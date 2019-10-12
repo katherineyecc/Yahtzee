@@ -15,12 +15,16 @@ import com.chuchuye.Yahtzee.Server;
 public class Client {
 	
 	public Player player = new Player();
+	public Player[] enemy = new Player[2];
 	int[] diceList = new int[5];
+	boolean roundStart = false;//一轮游戏结束变为false，得到Server的信号变为true
 	
 	String choiceMsg = "What action would you like to perform next?\n"
 			+ "(1)Select dice to re-roll?\n"
 			+ "(2)Re-roll all the dice?\n"
 			+ "(3)Score this round?\n";
+	String endSignal = "end";
+	String startSignal = "notStart";
 	
 	
 	public static void main(String[] args) {
@@ -50,6 +54,7 @@ public class Client {
 			
 			//发送玩家姓名
 			sendMsg(os, username);
+			os.flush();
 			//接收加入成功的通知
 			msg = readMsg(is);
 			System.out.println(msg);//login successfully...
@@ -110,6 +115,20 @@ public class Client {
 				}
 				//一轮游戏结束
 				System.out.println("You have completed this round!");
+				
+				sendMsg(os, endSignal);
+				os.flush();
+				while(true) {
+					//等待服务器端的信号才能开始下一轮
+					startSignal = readMsg(is);
+					if(startSignal.contentEquals("start")) {
+						break;
+					} else {
+						System.out.println("You still need to wait...");
+					}
+				}
+				startSignal = "notStart";
+				
 				System.out.println("Press <<1>> to start next round...");
 				s = scanner.nextLine();
 				if(s == "1") {}
@@ -125,22 +144,7 @@ public class Client {
 			System.out.println("Please wait for other player to complete...");
 			
 			msg = Integer.toString(player.getScore());
-			
-			
-			//System.out.println("enter the score:");
-			//msg = scanner.nextLine();
 			sendMsg(os, msg);
-			
-			/*
-			int i = Integer.parseInt(msg);
-			for(int index=0; index<3; index++) {
-				if(Server.getScore(index) == -1) {
-					Server.setScore(index, i);
-					break;
-				}
-			}
-			*/
-			//sendMsg(os, msg);
 			
 			String winnerName = null;
 			
@@ -149,42 +153,7 @@ public class Client {
 				if(winnerName != null)
 					break;
 			}
-			System.out.println("The Winner is:"+winnerName+"!");
-			
-			/*
-			//接下来用send，read和scan来与服务器进行交流
-			//发送消息线程
-			new Thread() {
-				public void run() {
-					try {
-						while(true) {
-							//从控制台扫描输入的信息
-							String message = scanner.nextLine();
-							sendMsg(os, message);
-						}
-					} catch(Exception e) {
-						e.printStackTrace();
-					}
-				};
-			}.start();
-			
-			//读取消息线程
-			new Thread() {
-				public void run() {
-					try {
-						while(true) {
-							//String message = readMsg(is);
-							//System.out.println(message);
-							String winnerName = readMsg(is);
-							System.out.println("The winner is:" + winnerName + "!");
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				};
-			}.start();
-			*/
-			//System.out.println("The winner is:" + winnerName + "!");
+			System.out.println("The Winner is:"+winnerName+"!");		
 			
 		} catch (Exception e) {
 			e.printStackTrace();
