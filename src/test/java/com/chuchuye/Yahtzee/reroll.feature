@@ -25,3 +25,13 @@ Feature: Title of your feature
 		When I want to reroll all five dices
 		
 		Then I get my reroll-once score
+		
+	@tag4
+	Scenario: Score after two rerolls
+		Given I roll the dice once
+		
+		When I want to reroll the dice
+		
+		And I want to reroll the dice again
+		
+		Then I get my reroll score
