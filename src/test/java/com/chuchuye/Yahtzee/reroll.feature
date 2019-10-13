@@ -9,3 +9,11 @@ Feature: Title of your feature
     When I want to score a round
     
     Then I get my score
+
+	@tag2
+	Scenario: Score with one reroll of less than five dices
+		Given I roll the dice once
+		
+		When I want to reroll less than five of them
+		
+		Then I get my reroll-once score
