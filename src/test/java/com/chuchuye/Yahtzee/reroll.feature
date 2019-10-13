@@ -17,3 +17,11 @@ Feature: Title of your feature
 		When I want to reroll less than five of them
 		
 		Then I get my reroll-once score
+		
+	@tag3
+	Scenario: Score with one reroll of five dices
+		Given I roll the dice once
+		
+		When I want to reroll all five dices
+		
+		Then I get my reroll-once score
