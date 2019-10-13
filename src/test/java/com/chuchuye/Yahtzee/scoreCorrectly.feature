@@ -25,4 +25,12 @@ Feature: Title of your feature
       | 3 1 1 1 1   | 11| 7  | 
       | 1 1 1 1 6   | 12| 10 |
       | 1 1 1 1 1   | 13| 50 |
+      
+	@tag2
+	Scenario: Score thirty-five points in upper section bonus
+		Given I finish upper section and upper section's total score is over or equal to sixty-three points
+		
+		When I want to score the upper section bonus
+		
+		Then I score thirty-five points in upper section bonus
  
