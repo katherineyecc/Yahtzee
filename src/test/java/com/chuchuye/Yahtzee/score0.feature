@@ -8,7 +8,7 @@ Feature: Score zero Feature
     
     When I want to score <categoryNumber>
     
-    Then I score zero points in <categoryNumber>
+    Then I score zero point in <categoryNumber>
     
     Examples: 
     | category | categoryNumber |
@@ -24,4 +24,12 @@ Feature: Score zero Feature
 		|ThreeOfAKind|    10        |
 		|FourOfAKind|     11        |
 		|  Yahtzee |      13        |
+		
+	@tag2
+	Scenario: Score zero in upper section bonus
+		Given I finished upper section and upper section's total score is under sixty-three
+		
+		When I want to check upper section bonus
+		
+		Then I score zero point in upper section bonus
 

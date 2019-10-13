@@ -8,6 +8,7 @@ import junit.framework.TestCase;
 public class StepDefScore0 extends TestCase {
 	
 	Game game = new Game();
+	Player player = new Player();
 	
 	@Given("I finish a round and have no ones in all five dices")
 	public void i_finish_a_round_and_have_no_ones_in_all_five_dices() {
@@ -20,9 +21,9 @@ public class StepDefScore0 extends TestCase {
 	    game.playerChoice(int1);
 	}
 
-	@Then("I score zero points in {int}")
-	public void i_score_zero_points_in(Integer int1) {
-	    int score = game.getScore(int1-1);
+	@Then("I score zero point in {int}")
+	public void i_score_zero_point_in(Integer int1) {
+		int score = game.getScore(int1-1);
 	    assertEquals(0, score);
 	}
 
@@ -91,6 +92,25 @@ public class StepDefScore0 extends TestCase {
 		int[] dList = new int[] {1,3,4,5,6};
 	    game.setDList(dList);
 	}
+
+	@Given("I finished upper section and upper section's total score is under sixty-three")
+	public void i_finished_upper_section_and_upper_section_s_total_score_is_under_sixty_three() {
+	    for(int index=0; index<6; index++) {
+	    	player.setScoreBoard(index, index+1);
+	    }
+	}
+
+	@When("I want to check upper section bonus")
+	public void i_want_to_check_upper_section_bonus() {
+	    player.countBonus();
+	}
+
+	@Then("I score zero point in upper section bonus")
+	public void i_score_zero_point_in_upper_section_bonus() {
+	    int bonus = player.getBonus();
+	    assertEquals(0, bonus);
+	}
+
 
 
 }
