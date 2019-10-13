@@ -43,5 +43,26 @@ public class StepDefCorrectly extends TestCase {
 		int bonus = player.getBonus();
 	    assertEquals(35, bonus);
 	}
+	
+	@Given("I get a Yahtzee and score Yahtzee that round")
+	public void i_get_a_Yahtzee_and_score_Yahtzee_that_round() {
+	    player.setScoreBoard(12, 50);
+	}
+
+	@Given("I get a Yahtzee again")
+	public void i_get_a_Yahtzee_again() {
+	    player.setYahtzeeFlag();
+	}
+
+	@When("I want to score the Yahtzee bonus")
+	public void i_want_to_score_the_Yahtzee_bonus() {
+	    player.countYahtzeeBonus();
+	}
+
+	@Then("I score one hundred points in Yahtzee bonuss")
+	public void i_score_one_hundred_points_in_Yahtzee_bonuss() {
+	    int YahtzeeBonus = player.getYahtzeeBonus();
+	    assertEquals(100, YahtzeeBonus);
+	}
 
 }

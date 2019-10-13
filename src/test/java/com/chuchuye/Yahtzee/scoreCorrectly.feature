@@ -33,4 +33,13 @@ Feature: Title of your feature
 		When I want to score the upper section bonus
 		
 		Then I score thirty-five points in upper section bonus
+		
+	@tag3
+	Scenario: Score one hundred points in Yahtzee bonus
+		Given I get a Yahtzee and score Yahtzee that round
+		And I get a Yahtzee again
+		
+		When I want to score the Yahtzee bonus
+		
+		Then I score one hundred points in Yahtzee bonuss
  
