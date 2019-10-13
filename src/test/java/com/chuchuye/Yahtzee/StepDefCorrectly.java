@@ -5,7 +5,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import junit.framework.TestCase;
 
-public class StepDefCorrectlyInAces extends TestCase {
+public class StepDefCorrectly extends TestCase {
 	
 	Game game = new Game();
 	
@@ -15,14 +15,14 @@ public class StepDefCorrectlyInAces extends TestCase {
 	    game.setDList(dList);
 	}
 
-	@When("I want to score Aces correctly")
-	public void i_want_to_score_Aces_correctly() {
-		game.playerChoice(1);
+	@When("I want to score {int} correctly")
+	public void i_want_to_score_correctly(Integer int1) {
+	    game.playerChoice(int1);
 	}
-
-	@Then("I score {int} points in Aces")
-	public void i_score_points_in_Aces(Integer int1) {
-	    assertEquals((int) int1, game.getScore(0));
+	
+	@Then("I score {int} points in {int}")
+	public void i_score_points_in(Integer int1, Integer int2) {
+	    assertEquals((int) int1, game.getScore(int2-1));
 	}
 
 }
