@@ -35,3 +35,22 @@ Feature: Title of your feature
 		And I want to reroll the dice again
 		
 		Then I get my reroll score
+		
+	@tag5
+	Scenario Outline: Combination of two rerolls
+		Given I roll the dice once
+		
+		When I want to reroll the dice of position <firstPosition>
+		
+		And I want to reroll the dice of position <secondPosition>
+		
+		Then I get my reroll score
+		
+		Examples:
+		
+		| firstPosition | secondPosition |
+		| "1"           | "1 2 3 4 5"    |
+		| "1 2 3 4 5"   | "3"            |
+		| "2"           | "4"            |
+		| "1 2 3 4 5"   | "1 2 3 4 5"    |
+		| "1 3 5"       | "2 4"          |

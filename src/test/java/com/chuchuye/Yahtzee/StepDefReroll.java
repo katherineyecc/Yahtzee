@@ -63,5 +63,11 @@ public class StepDefReroll extends TestCase{
 	public void i_get_my_reroll_score() {
 	    assertNotSame(0, game2.getScore(11));
 	}
+	
+	@When("I want to reroll the dice of position {string}")
+	public void i_want_to_reroll_the_dice_of_position(String string) {
+	    game2.rowPartDice(string);
+	    game2.playerChoice(12);
+	}
 
 }
