@@ -28,5 +28,18 @@ public class StepDefClient extends TestCase {
 	    String msg = "Welcome to the Game!";
 	    assertEquals(msg, cli.returnWelcomeMsg());
 	}
+	
+	@When("The Client connect to the server and finish all rounds")
+	public void the_Client_connect_to_the_server_and_finish_all_rounds() {
+	    cli = new ClientMock();
+	    cli.initClient2();
+	}
+
+	@Then("The Client receives ending message")
+	public void the_Client_receives_ending_message() {
+	    String msg = "You have completed all 13 rounds! End game!";
+	    assertEquals(msg, cli.returnEndingMsg());
+	}
+
 
 }

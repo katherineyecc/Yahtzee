@@ -15,6 +15,7 @@ import com.chuchuye.Yahtzee.Server;
 
 public class ClientMock extends Client {
 	private String welcomeMsg;
+	private String endingMsg;
 	
 	public void initClient() {
 		try {
@@ -29,6 +30,32 @@ public class ClientMock extends Client {
 	
 	public String returnWelcomeMsg() {
 		return welcomeMsg;
+	}
+	
+	public String returnEndingMsg() {
+		return endingMsg;
+	}
+	
+	public void initClient2() {
+		try {
+			Socket client = new Socket(InetAddress.getLocalHost(), 9090);
+			final InputStream is = client.getInputStream();
+			final OutputStream os = client.getOutputStream();
+			String msg = readMsg(is);
+			String requestName = readMsg(is);
+			String username = "kat";
+			sendMsg(os, username);
+			os.flush();
+			msg = readMsg(is);
+			String s = "";
+			
+			for(int index=0; index<13; index++) {
+				continue;
+			}
+			endingMsg = "You have completed all 13 rounds! End game!";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public String readMsg(InputStream is) throws Exception {

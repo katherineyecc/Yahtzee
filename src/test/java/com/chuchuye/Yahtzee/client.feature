@@ -10,3 +10,10 @@ Feature: Title of your feature
 
     Then The Client receives the welcome message
 
+	@tag2
+	Scenario: A player end the game
+		Given The server is on
+		
+		When The Client connect to the server and finish all rounds
+		
+		Then The Client receives ending message
