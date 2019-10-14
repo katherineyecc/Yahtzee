@@ -50,22 +50,20 @@ public class ServerThread extends Thread {
 			System.out.println(playerName + " has entered the game!");
 			
 			while(currentRound <= maxTurn) {
+				while(true) {
+					if(goodToGo == false) {
+						System.out.println("goodToGo is still FALSE.");
+						sleep(2000);
+					} else {
+						sendMsg(os, "start");
+						os.flush();
+						goodToGo = false;
+						break;
+					}
+				}
 				currentSignal = readMsg(is);
 				if(currentSignal.contentEquals("end")) {
-					//玩家一轮游戏结束后发来end信号
 					currentRound++;
-					while(true) {
-						if(goodToGo == false) {
-							System.out.println("goodToGo is still FALSE.");
-							sleep(2000);
-						} else {
-							sendMsg(os, "start");
-							os.flush();
-							goodToGo = false;
-							//currentSignal = "notend";
-							break;
-						}
-					}
 				}
 			}
 			

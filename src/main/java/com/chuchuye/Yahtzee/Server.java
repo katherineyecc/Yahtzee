@@ -49,23 +49,46 @@ public class Server {
 			}
 			
 			while(currentRound <= maxTurn) {
+				
+				list.get(0).goodToGo = true;
+				System.out.println("Player #1 is good to go.");
 				while(true) {
-					if((list.get(0).currentSignal.contentEquals("end")) && (list.get(1).currentSignal.contentEquals("end")) && (list.get(2).currentSignal.contentEquals("end"))) {
-						currentRound++;
-						for(int index=0; index<3; index++) {
-							list.get(index).goodToGo = true;
-							System.out.println("Player #"+(index+1)+" is goodToGo.");
-						}
+					if(list.get(0).currentSignal.contentEquals("end")) {
+						//kat结束此轮游戏
 						list.get(0).currentSignal = "notend";
-						list.get(1).currentSignal = "notend";
-						list.get(2).currentSignal = "notend";
+						list.get(1).goodToGo = true;//kyrie is good to go
+						System.out.println("Player #2 is good to go.");
 						break;
 					} else {
-						//System.out.println("Still have players not finishing this round...");
-						for(int index=0; index<3; index++) {
-							System.out.println("Thread #"+(index+1)+" is sleeping...");
-							list.get(index).sleep(2000);
-						}
+						System.out.println("Thread #2 and #3 are sleeping...");
+						list.get(1).sleep(5000);
+						list.get(2).sleep(5000);
+					}
+				}
+				while(true) {
+					if(list.get(1).currentSignal.contentEquals("end")) {
+						//kyrie结束此轮游戏
+						list.get(1).currentSignal = "notend";
+						list.get(2).goodToGo = true;//kyle is good to go
+						System.out.println("Player #3 is good to go.");
+						break;
+					} else {
+						System.out.println("Thread #3 and #1 are sleeping...");
+						list.get(2).sleep(5000);
+						list.get(0).sleep(5000);
+					}
+				}
+				while(true) {
+					if(list.get(2).currentSignal.contentEquals("end")) {
+						//kyle结束此轮游戏，即三名玩家本轮结束
+						list.get(2).currentSignal = "notend";
+						System.out.println("Round " + currentRound + " is over!");
+						currentRound++;
+						break;
+					} else {
+						System.out.println("Thread #1 and #2 are sleeping...");
+						list.get(0).sleep(5000);
+						list.get(1).sleep(5000);
 					}
 				}
 			}

@@ -65,6 +65,18 @@ public class Client {
 			String s = "";
 			//游戏开始
 			for(int index=0; index<13; index++) {
+				
+				while(true) {
+					//等待服务器端的信号才能开始下一轮
+					startSignal = readMsg(is);
+					if(startSignal.contentEquals("start")) {
+						break;
+					} else {
+						System.out.println("You still need to wait...");
+					}
+				}
+				startSignal = "notStart";
+				
 				clearWindow();
 				printScoreBoard(); 
 				Game game = new Game();
@@ -118,16 +130,6 @@ public class Client {
 				
 				sendMsg(os, endSignal);
 				os.flush();
-				while(true) {
-					//等待服务器端的信号才能开始下一轮
-					startSignal = readMsg(is);
-					if(startSignal.contentEquals("start")) {
-						break;
-					} else {
-						System.out.println("You still need to wait...");
-					}
-				}
-				startSignal = "notStart";
 				
 				System.out.println("Press <<1>> to start next round...");
 				s = scanner.nextLine();
