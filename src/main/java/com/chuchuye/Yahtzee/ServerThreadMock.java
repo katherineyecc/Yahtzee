@@ -22,6 +22,7 @@ public class ServerThreadMock extends Thread {
 	public int maxTurn = 13;
 	public int currentRound = 1;
 	public boolean goodToGo = false;
+	String[] playerInput = new String[13];
 	
 	public ServerThreadMock(Socket socket) {
 		this.socket = socket;
@@ -36,18 +37,18 @@ public class ServerThreadMock extends Thread {
 			String msg = "Welcome to the Game!";
 			sendMsg(os, msg);
 			//发送要求登录信息给客户端
-			String userInfo = "Please input your name:";
+			String userInfo = myName;
 			sendMsg(os, userInfo);
 			//获取客户端输入的用户名
-			String playerName = readMsg(is);//***
-			myName = playerName;
+			//String playerName = readMsg(is);//***
+			//myName = playerName;
 			//signal = true;
 			//发送加入成功的结果给客户端
 			msg = "login successfully! Waiting for game start...";
 			sendMsg(os, msg);
 			
 			
-			System.out.println(playerName + " has entered the game!");
+			System.out.println("Player has entered the game!");
 			
 			while(currentRound <= maxTurn) {
 				while(true) {
@@ -61,6 +62,7 @@ public class ServerThreadMock extends Thread {
 						break;
 					}
 				}
+				playerInput[currentRound-1] = readMsg(is);
 				currentSignal = readMsg(is);
 				if(currentSignal.contentEquals("end")) {
 					currentRound++;
@@ -135,6 +137,10 @@ public class ServerThreadMock extends Thread {
 	
 	public void setWinnerName(String name) {
 		winnerName = name;
+	}
+	
+	public void setPlayerName(String s) {
+		myName = s;
 	}
 	
 }

@@ -1,5 +1,7 @@
 package com.chuchuye.Yahtzee;
 
+import com.chuchuye.Client.ClientMock;
+
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -23,5 +25,7 @@ public class StepDefServer extends TestCase {
 	public void the_game_start() {
 	    assertEquals(true, sm.playerReady);
 	}
+	
+
 
 }

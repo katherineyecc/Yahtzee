@@ -10,4 +10,3 @@ Feature: Title of your feature
 
     Then The game start
 
-
