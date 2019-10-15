@@ -202,7 +202,8 @@ public class ServerMock {
 			while(currentRound <= maxTurn) {
 				
 				list.get(0).goodToGo = true;
-				ongoingPlayer[temp++] = 1;
+				ongoingPlayer[temp] = 1;
+				temp++;
 				System.out.println("Player #1 is good to go.");
 				while(true) {
 					if(list.get(0).currentSignal.contentEquals("end")) {
@@ -210,7 +211,8 @@ public class ServerMock {
 						list.get(0).currentSignal = "notend";
 						list.get(1).goodToGo = true;//kyrie is good to go
 						System.out.println("Player #2 is good to go.");
-						ongoingPlayer[temp++] = 2;
+						ongoingPlayer[temp] = 2;
+						temp++;
 						break;
 					} else {
 						System.out.println("Thread #2 and #3 are sleeping...");
@@ -224,7 +226,8 @@ public class ServerMock {
 						list.get(1).currentSignal = "notend";
 						list.get(2).goodToGo = true;//kyle is good to go
 						System.out.println("Player #3 is good to go.");
-						ongoingPlayer[temp++] = 3;
+						ongoingPlayer[temp] = 3;
+						temp++;
 						break;
 					} else {
 						System.out.println("Thread #3 and #1 are sleeping...");
